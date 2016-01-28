@@ -1,5 +1,7 @@
 /* global $ */
 
+require( '../bower_components/jquery.hx/dist/hx' );
+
 const yCount = 8;
 const xCount = 8;
 

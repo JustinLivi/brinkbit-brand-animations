@@ -14,7 +14,6 @@ module.exports = ( config ) => {
             'karma-sourcemap-loader',
             'karma-sinon-chai',
             'karma-browserify',
-            'karma-coverage',
         ],
 
         // frameworks to use
@@ -28,8 +27,6 @@ module.exports = ( config ) => {
         // list of files / patterns to load in the browser
         files: [
             'bower_components/jquery/dist/jquery.js',
-            'bower_components/jquery.hx/dist/hx.js',
-            'src/**/*.js',
             'test/**/*.js',
         ],
 
@@ -40,7 +37,6 @@ module.exports = ( config ) => {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/**/*.js': ['browserify'],
             'test/**/*.js': ['browserify'],
         },
 
@@ -50,39 +46,14 @@ module.exports = ( config ) => {
                     'babelify',
                     { presets: 'es2015' },
                 ],
-                [
-                    'browserify-istanbul',
-                    {
-                        instrumenterConfig: { embedSource: true },
-                    },
-                ],
             ],
             extensions: ['.js'],
-        },
-
-        coverageReporter: {
-            instrumenters: {
-                isparta: require( 'isparta' ),
-            },
-            instrumenter: {
-                'src/**/*.js': 'isparta',
-                'test/**/*.js': 'isparta',
-            },
-            reporters: [
-                {
-                    type: 'text-summary',
-                },
-                {
-                    type: 'html',
-                    dir: 'coverage/',
-                },
-            ],
         },
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: [ 'mocha', 'coverage' ],
+        reporters: ['mocha'],
 
         // web server port
         port: 9876,

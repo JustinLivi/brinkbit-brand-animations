@@ -1,4 +1,4 @@
-const alphabet = {
+export default {
 
     A: [
         [ 0, 0, 1, 1, 1, 1, 0, 0 ],
@@ -298,32 +298,3 @@ const alphabet = {
     ],
 
 };
-
-export const A = alphabet.A;
-export const B = alphabet.B;
-export const C = alphabet.C;
-export const D = alphabet.D;
-export const E = alphabet.E;
-export const F = alphabet.F;
-export const G = alphabet.G;
-export const H = alphabet.H;
-export const I = alphabet.I;
-export const J = alphabet.J;
-export const K = alphabet.K;
-export const L = alphabet.L;
-export const M = alphabet.M;
-export const N = alphabet.N;
-export const O = alphabet.O;
-export const P = alphabet.P;
-export const Q = alphabet.Q;
-export const R = alphabet.R;
-export const S = alphabet.S;
-export const T = alphabet.T;
-export const U = alphabet.U;
-export const V = alphabet.V;
-export const W = alphabet.W;
-export const X = alphabet.X;
-export const Y = alphabet.Y;
-export const Z = alphabet.Z;
-export const logo = alphabet.logo;
-export default alphabet;

@@ -1,7 +1,6 @@
 /* global $ */
 
-import alphabet from '../src/letters.js';
-import Animation from '../src/index.js';
+import { alphabet, Animation } from '../index.js';
 
 const $container = $( document.createElement( 'div' ))
 .css({
@@ -13,5 +12,8 @@ const $container = $( document.createElement( 'div' ))
 );
 
 const animation = new Animation( $container );
-animation.setupShape();
-animation.animateToLetter( alphabet.logo );
+animation.setupLetter();
+animation.animateToLetter( alphabet.logo, 500 )
+.then(() => {
+    animation.animateToLetter( alphabet.A, 500 );
+});

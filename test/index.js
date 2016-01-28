@@ -1,15 +1,12 @@
-/* eslint-env mocha */
-/* global expect, $ */
-/* eslint no-unused-expressions: 0 */
+/* global $, expect */
 
-import alphabet from '../src/letters.js';
-import Animation from '../src/index.js';
+import { alphabet, Animation } from '../index.js';
 
 describe( 'Animation', () => {
     let $container;
     let animation;
 
-    before(() => {
+    before( function() {
         $container = $( document.createElement( 'div' ))
         .css({
             width: 160,
@@ -20,20 +17,20 @@ describe( 'Animation', () => {
         );
     });
 
-    it( 'should be a class', () => {
+    it( 'should be a class', function() {
         expect( Animation ).to.be.a.class;
     });
 
-    describe( 'Animation constructor', () => {
-        it( 'should properly set the cubeWidth and cubeHeight', () => {
+    describe( 'Animation constructor', function() {
+        it( 'should properly set the cubeWidth and cubeHeight', function() {
             animation = new Animation( $container );
             expect( animation.cubeWidth ).to.equal( 20 );
             expect( animation.cubeHeight ).to.equal( 20 );
         });
     });
 
-    describe( '#setupLetter()', () => {
-        it( 'should create a grid in the DOM', () => {
+    describe( '#setupLetter()', function() {
+        it( 'should create a grid in the DOM', function() {
             animation.setupLetter();
             for ( let y = 0; y < 8; y++ ) {
                 for ( let x = 0; x < 8; x++ ) {
@@ -43,8 +40,8 @@ describe( 'Animation', () => {
         });
     });
 
-    describe( '#animateToLetter()', () => {
-        it( 'should scale letters appropriately', () => {
+    describe( '#animateToLetter()', function() {
+        it( 'should scale letters appropriately', function() {
             function getScale( $element ) {
                 return $element.hx( 'get', 'transform' )[0].scale;
             }

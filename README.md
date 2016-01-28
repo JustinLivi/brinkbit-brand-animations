@@ -4,12 +4,11 @@ TODO: Write a project description
 
 ## Installation
 
-`npm i --save brinkbit-animation`
+`npm i --save brinkbit-brand-animations`
 
 ## Dependencies
 
 Currently directly depends on global jquery and jquery.hx
-This will hopefully be deprecated in the future.
 
 ## Usage
 
@@ -18,8 +17,7 @@ Exposes es2015 modules which need to be transpiled and bundled.
 For letter animations:
 
 ```javascript
-import alphabet from '../src/letters.js';
-import Animation from '../src/index.js';
+import { alphabet, Animation } from 'brinkbit-brand-animations';
 
 // pass in a container element
 const $container = $( '.container' );
@@ -34,8 +32,7 @@ animation.animateToLetter( alphabet.logo, 1000 )
 
 ## Testing
 
-`npm install -g gulp`
-`npm run test`
+`npm test`
 
 ## Contributing
 

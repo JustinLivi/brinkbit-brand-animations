@@ -23,6 +23,6 @@
   ],
   "dependencies": {
     "jquery": "~2.2.0",
-    "jquery.hx": "~1.0.5"
+    "jquery.hx": "~1.1.0"
   }
 }

@@ -1,9 +1,8 @@
 # Installed files
 scripts/eslint-pre-commit
-.eslintrc
 
-# Dynamically generated debug files
-debug/bin
+# Dynamically generated files
+*.min.*
 
 # Logs
 logs
