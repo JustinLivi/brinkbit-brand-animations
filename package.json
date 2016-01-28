@@ -1,6 +1,6 @@
 {
   "name": "brinkbit-brand-animations",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Brinkbit proprietary brand animations",
   "repository": "https://github.com/Brinkbit/brinkbit-brand-animations.git",
   "main": "src/index.js",
