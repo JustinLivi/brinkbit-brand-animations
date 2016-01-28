@@ -1,6 +1,8 @@
-# brinkbit-animation
+# brinkbit-brand-animations
 
-TODO: Write a project description
+> They're specific to our brand, but hey, if you're curious, we're an open book.
+
+Proprietary brand animations for Brinkbit.
 
 ## Installation
 
@@ -17,7 +19,7 @@ Exposes es2015 modules which need to be transpiled and bundled.
 For letter animations:
 
 ```javascript
-import { alphabet, Animation } from 'brinkbit-brand-animations';
+import { alphabet, Animation } from 'node_modules/brinkbit-brand-animations';
 
 // pass in a container element
 const $container = $( '.container' );
