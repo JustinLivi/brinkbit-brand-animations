@@ -8,7 +8,7 @@
     "postinstall": "bower install",
     "preversion": "git clean -dffx; npm install; bower install; chmod 744 scripts/eslint-pre-commit; npm test",
     "version": "git add -A",
-    "postversion": "git push upstream master && git push origin master && git push origin master --tags",
+    "postversion": "git push origin master",
     "debug": "gulp debug",
     "test": "node_modules/karma/bin/karma start",
     "eslint-pre-commit": "./scripts/eslint-pre-commit"
