@@ -1,10 +1,11 @@
 {
   "name": "brinkbit-brand-animations",
-  "version": "0.2.2",
+  "version": "0.2.0",
   "description": "Brinkbit proprietary brand animations",
   "repository": "https://github.com/Brinkbit/brinkbit-brand-animations.git",
   "main": "src/index.js",
   "scripts": {
+    "postinstall": "bower install",
     "preversion": "git clean -dffx; npm install; bower install; chmod 744 scripts/eslint-pre-commit; npm test",
     "version": "git add -A",
     "postversion": "git push upstream master && git push origin master && git push origin master --tags",
