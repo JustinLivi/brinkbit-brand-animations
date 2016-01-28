@@ -12,7 +12,7 @@ const $container = $( document.createElement( 'div' ))
 );
 
 const animation = new Animation( $container );
-animation.setupLetter();
+animation.setupLetter( '#6fb7bd' );
 animation.animateToLetter( alphabet.logo, 500 )
 .then(() => {
     animation.animateToLetter( alphabet.A, 500 );

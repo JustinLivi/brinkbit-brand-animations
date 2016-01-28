@@ -13,7 +13,7 @@ class Animation {
         this.cubeHeight = this.$container.height() / yCount;
     }
 
-    setupLetter() {
+    setupLetter( color ) {
         for ( let y = 0; y < yCount; y++ ) {
             for ( let x = 0; x < xCount; x++ ) {
                 $( document.createElement( 'div' ))
@@ -21,7 +21,7 @@ class Animation {
                 .addClass( 'letter' )
                 .addClass( `letter-cube-${x}-${y}` )
                 .css({
-                    backgroundColor: '#1c97ea',
+                    backgroundColor: color || '#1c97ea',
                     width: this.cubeWidth,
                     height: this.cubeHeight,
                     transformOrigin: 'center',
@@ -49,6 +49,7 @@ class Animation {
                     type: 'transform',
                     scale: { x: scale, y: scale },
                     duration,
+                    delay: ( x + y ) * duration / 10,
                 });
                 if ( x || y ) {
                     fullSelector += ', ';
@@ -63,7 +64,7 @@ class Animation {
         const $element = typeof element === 'string' ? $( element ) : element;
         return new Promise(( resolve, reject ) => {
             if ( !$element || $element.length === 0 ) {
-                reject( new Error( 'Invalid selector' ));
+                reject( new Error( `Invalid selector: '${element}'` ));
                 return;
             }
             $element.hx()
