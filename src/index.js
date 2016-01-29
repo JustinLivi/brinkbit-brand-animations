@@ -44,7 +44,7 @@ class Animation {
                 const selector = `.letter-cube-${x}-${y}`;
                 let $el = $( selector );
                 const startScale = $el.hx( 'get', 'transform' )[0].scale;
-                if ( startScale === 1 || scale === 1 ) {
+                if ( startScale > 0.01 || scale === 1 ) {
                     $el.css({ opacity: 1 });
                 }
                 $el = $el.hx( 'clear' ).hx({
