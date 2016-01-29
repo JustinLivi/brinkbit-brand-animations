@@ -55,7 +55,7 @@ describe( 'Animation', () => {
                 y: 1,
                 z: 1,
             };
-            return animation.animateToLetter( alphabet.logo, 1000 )
+            return animation.animateToLetter( alphabet.logo, 500 )
             .then(() => {
                 expect( getScale( $container.find( `.letter-cube-0-0` ))).to.deep.equal( smallScale );
                 expect( getScale( $container.find( `.letter-cube-1-0` ))).to.deep.equal( fullScale );
