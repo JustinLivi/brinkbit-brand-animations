@@ -36,11 +36,9 @@ class Animation {
                 .appendTo( this.$container );
             }
         }
-        return this.resolveAnimation();
     }
 
     animateToLetter( letterMatrix, duration ) {
-        let fullSelector = '';
         for ( let y = 0; y < yCount; y++ ) {
             for ( let x = 0; x < xCount; x++ ) {
                 const scale = letterMatrix[y][x] || 0.01;
@@ -51,20 +49,16 @@ class Animation {
                     duration,
                     delay: ( x + y ) * duration / 10,
                 });
-                if ( x || y ) {
-                    fullSelector += ', ';
-                }
-                fullSelector += selector;
             }
         }
-        return this.resolveAnimation( fullSelector );
+        return this.resolveAnimation( '.letter' );
     }
 
     resolveAnimation( element ) {
         const $element = typeof element === 'string' ? $( element ) : element;
         return new Promise(( resolve, reject ) => {
             if ( !$element || $element.length === 0 ) {
-                reject( new Error( `Invalid selector: '${element}'` ));
+                reject( new Error( 'Invalid selector' ));
                 return;
             }
             $element.hx()
