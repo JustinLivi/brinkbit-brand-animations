@@ -9,8 +9,6 @@ class Animation {
 
     constructor( containerSelector ) {
         this.$container = $( containerSelector );
-        this.cubeWidth = this.$container.width() / xCount;
-        this.cubeHeight = this.$container.height() / yCount;
     }
 
     setupLetter( color ) {
@@ -23,12 +21,12 @@ class Animation {
                 .css({
                     opacity: 0,
                     backgroundColor: color || '#1c97ea',
-                    width: this.cubeWidth,
-                    height: this.cubeHeight,
+                    width: `${100 / xCount}%`,
+                    height: `${100 / yCount}%`,
                     transformOrigin: 'center',
                     position: 'absolute',
-                    top: y * this.cubeWidth,
-                    left: x * this.cubeHeight,
+                    top: `${100 / yCount * y}%`,
+                    left: `${100 / xCount * x}%`,
                 })
                 .hx( 'zero', {
                     type: 'transform',
