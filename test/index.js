@@ -15,18 +15,11 @@ describe( 'Animation', () => {
         .appendTo(
             $( 'body' )
         );
+        animation = new Animation( $container );
     });
 
     it( 'should be a class', function() {
         expect( Animation ).to.be.a.class;
-    });
-
-    describe( 'Animation constructor', function() {
-        it( 'should properly set the cubeWidth and cubeHeight', function() {
-            animation = new Animation( $container );
-            expect( animation.cubeWidth ).to.equal( 20 );
-            expect( animation.cubeHeight ).to.equal( 20 );
-        });
     });
 
     describe( '#setupLetter()', function() {
