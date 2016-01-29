@@ -47,7 +47,7 @@ class Animation {
                 if ( startScale === 1 || scale === 1 ) {
                     $el.css({ opacity: 1 });
                 }
-                $el = $el.hx({
+                $el = $el.hx( 'clear' ).hx({
                     type: 'transform',
                     scale: { x: scale, y: scale },
                     duration,
