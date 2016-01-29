@@ -21,6 +21,7 @@ class Animation {
                 .addClass( 'letter' )
                 .addClass( `letter-cube-${x}-${y}` )
                 .css({
+                    opacity: 0,
                     backgroundColor: color || '#1c97ea',
                     width: this.cubeWidth,
                     height: this.cubeHeight,
@@ -43,12 +44,23 @@ class Animation {
             for ( let x = 0; x < xCount; x++ ) {
                 const scale = letterMatrix[y][x] || 0.01;
                 const selector = `.letter-cube-${x}-${y}`;
-                $( selector ).hx({
+                let $el = $( selector );
+                const startScale = $el.hx( 'get', 'transform' )[0].scale;
+                if ( startScale === 1 || scale === 1 ) {
+                    $el.css({ opacity: 1 });
+                }
+                $el = $el.hx({
                     type: 'transform',
                     scale: { x: scale, y: scale },
                     duration,
                     delay: ( x + y ) * duration / 10,
                 });
+                if ( scale !== 1 ) {
+                    $el.then( next => {
+                        $el.css({ opacity: 0 });
+                        next();
+                    });
+                }
             }
         }
         return this.resolveAnimation( '.letter' );
