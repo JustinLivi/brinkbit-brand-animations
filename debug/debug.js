@@ -2,14 +2,8 @@
 
 import { alphabet, Animation } from '../index.js';
 
-const $container = $( document.createElement( 'div' ))
-.css({
-    width: 160,
-    height: 160,
-})
-.appendTo(
-    $( 'body' )
-);
+const $letterContainer = $( '#letter-container' );
+const $flowContainer = $( '#flow-container' );
 
 const options = [
     'A',
@@ -41,13 +35,17 @@ const options = [
     'logo',
 ];
 
-const animation = new Animation( $container );
-animation.setupLetter( '#6fb7bd' );
-animation.animateToLetter( alphabet.logo, 500 )
+const letterAnimation = new Animation( $letterContainer );
+letterAnimation.setupLetter( '#6fb7bd' );
+letterAnimation.animateToLetter( alphabet.logo, 500 )
 .then(() => {
-    animation.animateToLetter( alphabet.A, 500 );
+    letterAnimation.animateToLetter( alphabet.A, 500 );
 });
 
 $( 'body' ).on( 'click', () => {
-    animation.animateToLetter( alphabet[options[Math.floor( Math.random() * 26 )]], 500 );
+    letterAnimation.animateToLetter( alphabet[options[Math.floor( Math.random() * 26 )]], 500 );
 });
+
+const flowAnimation = new Animation( $flowContainer );
+flowAnimation.setupFlow();
+flowAnimation.startFlow();

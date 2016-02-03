@@ -2,9 +2,6 @@
 
 require( '../bower_components/jquery.hx/dist/hx' );
 
-const yCount = 8;
-const xCount = 8;
-
 class Animation {
 
     constructor( containerSelector ) {
@@ -12,21 +9,22 @@ class Animation {
     }
 
     setupLetter( color ) {
-        for ( let y = 0; y < yCount; y++ ) {
-            for ( let x = 0; x < xCount; x++ ) {
+        this.yCount = 8;
+        this.xCount = 8;
+        for ( let y = 0; y < this.yCount; y++ ) {
+            for ( let x = 0; x < this.xCount; x++ ) {
                 $( document.createElement( 'div' ))
                 .addClass( 'cube' )
                 .addClass( 'letter' )
                 .addClass( `letter-cube-${x}-${y}` )
                 .css({
-                    // opacity: 0,
-                    backgroundColor: color || '#1c97ea',
-                    width: `${100 / xCount}%`,
-                    height: `${100 / yCount}%`,
+                    backgroundColor: color || '#447c91',
+                    width: `${100 / this.xCount}%`,
+                    height: `${100 / this.yCount}%`,
                     transformOrigin: 'center',
                     position: 'absolute',
-                    top: `${100 / yCount * y}%`,
-                    left: `${100 / xCount * x}%`,
+                    top: `${100 / this.yCount * y}%`,
+                    left: `${100 / this.xCount * x}%`,
                 })
                 .hx( 'zero', {
                     type: 'transform',
@@ -38,8 +36,8 @@ class Animation {
     }
 
     animateToLetter( letterMatrix, duration ) {
-        for ( let y = 0; y < yCount; y++ ) {
-            for ( let x = 0; x < xCount; x++ ) {
+        for ( let y = 0; y < this.yCount; y++ ) {
+            for ( let x = 0; x < this.xCount; x++ ) {
                 const scale = letterMatrix[y][x] || 0.01;
                 const selector = `.letter-cube-${x}-${y}`;
                 const delay = ( x + y ) * duration / 10 || 1;
@@ -81,6 +79,120 @@ class Animation {
                 resolve();
                 next();
             });
+        });
+    }
+
+    createFlowCube( x, y, i, value, color ) {
+        const marginX = 6;
+        const marginY = 4;
+        return $( document.createElement( 'div' ))
+        .addClass( 'cube' )
+        .addClass( `flow-${value}-cube-${i}` )
+        .css({
+            width: `${100 / this.xCount - marginX}%`,
+            height: `${100 / this.yCount - marginY}%`,
+            transformOrigin: 'center',
+            position: 'absolute',
+            top: `${100 / this.yCount * y + marginY / 2}%`,
+            left: `${100 / this.xCount * x + marginX / 2}%`,
+            backgroundColor: color,
+        });
+    }
+
+    flowUp( $el, start ) {
+        const startVal = start === 0.01 || !start ? 0 : start;
+        $el.hx({
+            type: 'transform',
+            scale: { x: 1, y: 1 },
+            duration: 5000 * ( 1 - startVal ),
+        });
+        return this.resolveAnimation( $el );
+    }
+
+    flowLoopLight( i, start ) {
+        const $el = $( `.flow-light-cube-${i}` );
+        $el.hx( 'zero', {
+            type: 'transform',
+            scale: { x: start || 0.01, y: start || 0.01 },
+        });
+        $( `.flow-dark-cube-${i}.flow-layer-2` ).hide();
+        this.flowUp( $el, start )
+        .then(() => this.flowLoopDark( i ));
+    }
+
+    flowLoopDark( i, start ) {
+        const $el = $( `.flow-dark-cube-${i}` );
+        $el.hx( 'zero', {
+            type: 'transform',
+            scale: { x: start || 0.01, y: start || 0.01 },
+        });
+        $( `.flow-dark-cube-${i}.flow-layer-2` ).show();
+        this.flowUp( $el, start )
+        .then(() => this.flowLoopLight( i ));
+    }
+
+    startFlow() {
+        for ( let i = 0; i < 5; i++ ) {
+            $( `.flow-dark-cube-${i}` ).hx( 'zero', {
+                type: 'transform',
+                scale: { x: 1, y: 1 },
+            });
+            $( `.flow-light-cube-${i}` ).hx( 'zero', {
+                type: 'transform',
+                scale: { x: i * 0.2, y: i * 0.2 },
+            });
+            this.flowLoopLight( i, i * 0.2 );
+        }
+        for ( let i = 5; i < 10; i++ ) {
+            $( `.flow-dark-cube-${i}` ).hx( 'zero', {
+                type: 'transform',
+                scale: { x: ( i - 5 ) * 0.2, y: ( i - 5 ) * 0.2 },
+            });
+            $( `.flow-light-cube-${i}` ).hx( 'zero', {
+                type: 'transform',
+                scale: { x: 1, y: 1 },
+            });
+            this.flowLoopDark( i, ( i - 5 ) * 0.2 );
+        }
+    }
+
+    setupFlow( lightColor, darkColor ) {
+        this.yCount = 4;
+        this.xCount = 3;
+        [
+            { x: 0, y: 1 },
+            { x: 0, y: 2 },
+            { x: 0, y: 3 },
+            { x: 1, y: 3 },
+            { x: 2, y: 3 },
+            { x: 2, y: 2 },
+            { x: 2, y: 1 },
+            { x: 2, y: 0 },
+            { x: 1, y: 0 },
+            { x: 0, y: 0 },
+        ].forEach(( coordinates, i ) => {
+            this.$container
+            .append( this.createFlowCube(
+                coordinates.x,
+                coordinates.y,
+                i,
+                'dark',
+                darkColor || '#447c91'
+            ).addClass( 'flow-layer-0' ))
+            .append( this.createFlowCube(
+                coordinates.x,
+                coordinates.y,
+                i,
+                'light',
+                lightColor || '#6fb7bd'
+            ).addClass( 'flow-layer-1' ))
+            .append( this.createFlowCube(
+                coordinates.x,
+                coordinates.y,
+                i,
+                'dark',
+                darkColor || '#447c91'
+            ).addClass( 'flow-layer-2' ));
         });
     }
 
