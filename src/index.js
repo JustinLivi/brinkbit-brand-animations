@@ -83,8 +83,8 @@ class Animation {
     }
 
     createFlowCube( x, y, i, value, color ) {
-        const marginX = 6;
-        const marginY = 4;
+        const marginX = 9;
+        const marginY = 6;
         return $( document.createElement( 'div' ))
         .addClass( 'cube' )
         .addClass( `flow-${value}-cube-${i}` )
