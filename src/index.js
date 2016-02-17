@@ -19,8 +19,8 @@ class Animation {
                 .addClass( `letter-cube-${x}-${y}` )
                 .css({
                     backgroundColor: color || '#447c91',
-                    width: `${100 / this.xCount}%`,
-                    height: `${100 / this.yCount}%`,
+                    width: `${100 / this.xCount + 0.1}%`,
+                    height: `${100 / this.yCount + 0.1}%`,
                     transformOrigin: 'center',
                     position: 'absolute',
                     top: `${100 / this.yCount * y}%`,
@@ -89,8 +89,8 @@ class Animation {
         .addClass( 'cube' )
         .addClass( `flow-${value}-cube-${i}` )
         .css({
-            width: `${100 / this.xCount - marginX}%`,
-            height: `${100 / this.yCount - marginY}%`,
+            width: `${100 / this.xCount - marginX + 0.1}%`,
+            height: `${100 / this.yCount - marginY + 0.1}%`,
             transformOrigin: 'center',
             position: 'absolute',
             top: `${100 / this.yCount * y + marginY / 2}%`,
